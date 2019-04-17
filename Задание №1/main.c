@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include "computeFunctions.c"
 
+#define ARGNUM 256
+
 int main(int argc, char *argv[]) {
     int i;
     char argName[ARGNUM];

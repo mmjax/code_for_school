@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "computeFunctions.h"
 
-#define ARGNUM 256
+
 
 /*
 @example FUNCTION(y=8+46*x) |y = y, b = 8, a = 46, x = x|
