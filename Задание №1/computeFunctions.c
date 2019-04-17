@@ -6,12 +6,6 @@
 
 #define ARGNUM 256
 
-char argName[ARGNUM];
-int argVal[ARGNUM];
-int argCnt = 0;
-char y, x;
-int a, b;
-
 /*
 @example FUNCTION(y=8+46*x) |y = y, b = 8, a = 46, x = x|
 @param str(текущий аргумент)
@@ -19,10 +13,10 @@ int a, b;
 @throws -
 @uses "computeFunctions.h"
 */
-int parseFunction(char *str) {
-    getY(str);
-    getAX(str);
-    getB(str);
+int parseFunction(char *str, char *y, char *x, int *a, int *b) {
+    getY(str, &y);
+    getAX(str, &x, &a);
+    getB(str, &b);
 
     return 0;
 }
@@ -34,7 +28,7 @@ int parseFunction(char *str) {
 @return 0
 @throws -
 */
-int parseSet(char *str) {
+int parseSet(char *str, char *argName, int *argVal, int *argCnt) {
     int i;
     for (i = 4;  i < strlen(str) && str[i] != '='; i++) ;
     if (1 == isdigit(str[i+1])){
@@ -56,7 +50,7 @@ int parseSet(char *str) {
 @return 0
 @throws HAVE NO 'z' VARIABLE , HAVE NO FUNCTION AT ALL , CANNOT SET CONSTANT
 */
-int computeFunction(void) {
+int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, char *x, char *y) {
     int i;
     for (i = 0; i < argCnt; i++) {
         if (y == argName[i])
@@ -78,7 +72,7 @@ int computeFunction(void) {
 @return 0
 @throws -
 */
-int getY(char *str) {
+char getY(char *str, char *y) {
     int i;
     for (i = 9;  i < strlen(str) && str[i] != '='; i++) ;
     if ('(' == str[i-2])
@@ -95,7 +89,7 @@ int getY(char *str) {
 @throws -
 */
 
-int getAX(char *str) {
+int getAX(char *str, char *x, int *a) {
     int i;
     for (i = 8;  i < strlen(str) && str[i] != '*'; i++) ;
     if (1 == isdigit(str[i+1])){
@@ -118,7 +112,7 @@ int getAX(char *str) {
 @throws -
 (y=8+469*x)
 */
-int getB(char *str) {
+int getB(char *str, int *b) {
     int i;
     for (i = 9; i < strlen(str) && str[i] != '*' && str[i] != '+'; i++) ;
     if ('*' == str[i]){

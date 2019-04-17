@@ -9,17 +9,23 @@
 */
 #include <string.h>
 #include <stdio.h>
-#include "computeFunctions.h"
+#include "computeFunctions.c"
 
 int main(int argc, char *argv[]) {
     int i;
+    char argName[ARGNUM];
+    int argVal[ARGNUM];
+    int argCnt = 0;
+    char y, x;
+    int a, b;
+
     for (i = 1; i < argc; i++) {
         if (0 == strncmp(argv[i], "SET", strlen("SET"))) {
-            parseSet(argv[i]);
+            parseSet(argv[i], argName, argVal, &argCnt);
         }
         if (0 == strncmp(argv[i], "FUNCTION", strlen("FUNCTION")))
-            parseFunction(argv[i]);
+            parseFunction(argv[i], &y, &x, &a, &b);
     }
-    computeFunction();
+    computeFunction(argName, argVal, &argCnt, &a, &b, &x, &y);
     return 0;
 }
