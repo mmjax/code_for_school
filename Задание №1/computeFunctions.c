@@ -28,16 +28,16 @@ int parseFunction(char *str, char *y, char *x, int *a, int *b) {
 @return 0
 @throws -
 */
-int parseSet(char *str, char *argName, int *argVal, int *argCnt) {
+int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
     int i;
     for (i = 4;  i < strlen(str) && str[i] != '='; i++) ;
     if (1 == isdigit(str[i+1])){
-        argVal[argCnt] = atoi((char *)(&str[i+1]));
-        argName[argCnt] = str[i-1];
+        argVal[*argCnt] = atoi((char *)(&str[i+1]));
+        argName[*argCnt] = str[i-1];
     }
     else {
-        argVal[argCnt] = atoi((char *)(&str[4]));
-        argName[argCnt] = str[i+1];
+        argVal[*argCnt] = atoi((char *)(&str[4]));
+        argName[*argCnt] = str[i+1];
     }
     argCnt++;
     return 0;
@@ -60,7 +60,7 @@ int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, cha
         else if (y == argName[i] && x == argName[i])
             printf("HAVE NO FUNCTION AT ALL\n");
         else {
-            printf("%c(%d) = %d\n", y, argVal[i], (argVal[i] * a) + b);
+            printf("%c(%d) = %d\n", y, argVal[i], argVal[i] * (*a) + (*b));
         }
     }
     return 0;
