@@ -1,1 +1,1 @@
-gcc -o calc main.c computeFunctions.c
+gcc -DDEBUG -DMAX_N=5 -DMAX_M=5 -o calc -Wall -Wextra -Werror main.c

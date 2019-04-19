@@ -14,9 +14,9 @@
 @uses "computeFunctions.h"
 */
 int parseFunction(char *str, char *y, char *x, int *a, int *b) {
-    getY(str, &y);
-    getAX(str, &x, &a);
-    getB(str, &b);
+    getY(str, y);
+    getAX(str, x, a);
+    getB(str, b);
 
     return 0;
 }
