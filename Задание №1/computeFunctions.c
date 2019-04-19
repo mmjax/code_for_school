@@ -30,7 +30,7 @@ int parseFunction(char *str, char *y, char *x, int *a, int *b) {
 */
 int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
     int i;
-    for (i = 4;  i < strlen(str) && str[i] != '='; i++) ;
+    for (i = 4;  (i < strlen(str)) && (str[i] != '='); i++) ;
     if (1 == isdigit(str[i+1])){
         argVal[*argCnt] = atoi((char *)(&str[i+1]));
         argName[*argCnt] = str[i-1];
@@ -39,7 +39,6 @@ int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
         argVal[*argCnt] = atoi((char *)(&str[4]));
         argName[*argCnt] = str[i+1];
     }
-    *argCnt++;
     return 0;
 }
 
@@ -74,7 +73,7 @@ int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, cha
 */
 int getY(char *str, char *y) {
     int i;
-    for (i = 9;  i < strlen(str) && str[i] != '='; i++) ;
+    for (i = 9;  (i < strlen(str)) && (str[i] != '='); i++) ;
     if ('(' == str[i-2])
         *y = str[i-1];
     else
@@ -91,7 +90,7 @@ int getY(char *str, char *y) {
 
 int getAX(char *str, char *x, int *a) {
     int i;
-    for (i = 8;  i < strlen(str) && str[i] != '*'; i++) ;
+    for (i = 8; (i < strlen(str)) && str[i] != '*'; i++) ;
     if (1 == isdigit(str[i+1])){
         *x = str[i-1];
         *a = atoi((char *)(&str[i+1]));
