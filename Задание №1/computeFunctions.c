@@ -30,7 +30,7 @@ int parseFunction(char *str, char *y, char *x, int *a, int *b) {
 */
 int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
     int i;
-    for (i = 4;  (i < strlen(str)) && (str[i] != '='); i++) ;
+    for (i = 4;  i < (int)strlen(str) && str[i] != '='; i++) ;
     if (1 == isdigit(str[i+1])){
         argVal[*argCnt] = atoi((char *)(&str[i+1]));
         argName[*argCnt] = str[i-1];
@@ -73,7 +73,7 @@ int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, cha
 */
 int getY(char *str, char *y) {
     int i;
-    for (i = 9;  (i < strlen(str)) && (str[i] != '='); i++) ;
+    for (i = 9;  i < (int)strlen(str) && str[i] != '='; i++) ;
     if ('(' == str[i-2])
         *y = str[i-1];
     else
@@ -90,7 +90,7 @@ int getY(char *str, char *y) {
 
 int getAX(char *str, char *x, int *a) {
     int i;
-    for (i = 8; (i < strlen(str)) && str[i] != '*'; i++) ;
+    for (i = 8; i < (int)strlen(str) && str[i] != '*'; i++) ;
     if (1 == isdigit(str[i+1])){
         *x = str[i-1];
         *a = atoi((char *)(&str[i+1]));
@@ -113,9 +113,9 @@ int getAX(char *str, char *x, int *a) {
 */
 int getB(char *str, int *b) {
     int i;
-    for (i = 9; i < strlen(str) && str[i] != '*' && str[i] != '+'; i++) ;
+    for (i = 9; i < (int)strlen(str) && str[i] != '*' && str[i] != '+'; i++) ;
     if ('*' == str[i]){
-        for(i++; i < strlen(str) && str[i] != '+'; i++) ;
+        for(i++; i < (int)strlen(str) && str[i] != '+'; i++) ;
         *b = atoi((char *)(&str[i+1]));
     }
     else {
