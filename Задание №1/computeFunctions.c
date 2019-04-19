@@ -39,7 +39,7 @@ int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
         argVal[*argCnt] = atoi((char *)(&str[4]));
         argName[*argCnt] = str[i+1];
     }
-    argCnt++;
+    *argCnt++;
     return 0;
 }
 
@@ -52,15 +52,15 @@ int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
 */
 int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, char *x, char *y) {
     int i;
-    for (i = 0; i < argCnt; i++) {
-        if (y == argName[i])
+    for (i = 0; i < *argCnt; i++) {
+        if (*y == argName[i])
             printf("CANNOT SET CONSTANT\n");
-        else if (x != argName[i])
+        else if (*x != argName[i])
             printf("HAVE NO '%c' VARIABLE\n", argName[i]);
-        else if (y == argName[i] && x == argName[i])
+        else if (*y == argName[i] && *x == argName[i])
             printf("HAVE NO FUNCTION AT ALL\n");
         else {
-            printf("%c(%d) = %d\n", y, argVal[i], argVal[i] * (*a) + (*b));
+            printf("%c(%d) = %d\n", *y, argVal[i], argVal[i] * (*a) + (*b));
         }
     }
     return 0;
@@ -72,13 +72,13 @@ int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, cha
 @return 0
 @throws -
 */
-char getY(char *str, char *y) {
+int getY(char *str, char *y) {
     int i;
     for (i = 9;  i < strlen(str) && str[i] != '='; i++) ;
     if ('(' == str[i-2])
-        y = str[i-1];
+        *y = str[i-1];
     else
-        y = str[i+1];       
+        *y = str[i+1];       
     return 0;
 }
 
@@ -93,14 +93,14 @@ int getAX(char *str, char *x, int *a) {
     int i;
     for (i = 8;  i < strlen(str) && str[i] != '*'; i++) ;
     if (1 == isdigit(str[i+1])){
-        x = str[i-1];
-        a = atoi((char *)(&str[i+1]));
+        *x = str[i-1];
+        *a = atoi((char *)(&str[i+1]));
     }
     else {
-        x = str[i+1];
+        *x = str[i+1];
         for (i--; str[i] != '(' && 1 == isdigit(str[i]); i--);
         i++;
-        a = atoi((char *)(&str[i]));
+        *a = atoi((char *)(&str[i]));
     }
     return 0;
 }
@@ -117,11 +117,11 @@ int getB(char *str, int *b) {
     for (i = 9; i < strlen(str) && str[i] != '*' && str[i] != '+'; i++) ;
     if ('*' == str[i]){
         for(i++; i < strlen(str) && str[i] != '+'; i++) ;
-        b = atoi((char *)(&str[i+1]));
+        *b = atoi((char *)(&str[i+1]));
     }
     else {
         for (i--; str[i] != '(' && 1 == isdigit(str[i]); i--) ;
-        b = atoi((char *)(&str[i+1]));
+        *b = atoi((char *)(&str[i+1]));
     }
     
     return 0;
