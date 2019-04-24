@@ -39,6 +39,7 @@ int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
         argVal[*argCnt] = atoi((char *)(&str[4]));
         argName[*argCnt] = str[i+1];
     }
+    (*argCnt)++;
     return 0;
 }
 

@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     for (i = 1; i < argc; i++) {
         if (0 == strncmp(argv[i], "SET", strlen("SET"))) {
             parseSet(argv[i], argName, argVal, &argCnt);
+            
         }
         if (0 == strncmp(argv[i], "FUNCTION", strlen("FUNCTION")))
             parseFunction(argv[i], &y, &x, &a, &b);
