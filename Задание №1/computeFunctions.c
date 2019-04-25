@@ -50,17 +50,17 @@ int parseSet(char *str, char *argName, int *argVal,int *argCnt) {
 @return 0
 @throws HAVE NO 'z' VARIABLE , HAVE NO FUNCTION AT ALL , CANNOT SET CONSTANT
 */
-int computeFunction(char *argName, int *argVal, int *argCnt, int *a, int *b, char *x, char *y) {
+int computeFunction(char *argName, int *argVal, int argCnt, int a, int b, char x, char y) {
     int i;
-    for (i = 0; i < *argCnt; i++) {
-        if (*y == argName[i])
+    for (i = 0; i < argCnt; i++) {
+        if (y == argName[i])
             printf("CANNOT SET CONSTANT\n");
-        else if (*x != argName[i])
+        else if (x != argName[i])
             printf("HAVE NO '%c' VARIABLE\n", argName[i]);
-        else if (*y == argName[i] && *x == argName[i])
+        else if (y == argName[i] && x == argName[i])
             printf("HAVE NO FUNCTION AT ALL\n");
         else {
-            printf("%c(%d) = %d\n", *y, argVal[i], argVal[i] * (*a) + (*b));
+            printf("%c(%d) = %d\n", y, argVal[i], argVal[i] * a + b);
         }
     }
     return 0;

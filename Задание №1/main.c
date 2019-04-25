@@ -29,6 +29,6 @@ int main(int argc, char *argv[]) {
         if (0 == strncmp(argv[i], "FUNCTION", strlen("FUNCTION")))
             parseFunction(argv[i], &y, &x, &a, &b);
     }
-    computeFunction(argName, argVal, &argCnt, &a, &b, &x, &y);
+    computeFunction(argName, argVal, argCnt, a, b, x, y);
     return 0;
 }
