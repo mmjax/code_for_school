@@ -110,7 +110,6 @@ int getAX(char *str, char *x, int *a) {
 @param str(текущий аргумент)
 @return 0
 @throws -
-(y=8+469*x)
 */
 int getB(char *str, int *b) {
     int i;
