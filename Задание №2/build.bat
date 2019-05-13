@@ -1,0 +1,1 @@
+gcc -o ipcalc main.c computeFunc.c
